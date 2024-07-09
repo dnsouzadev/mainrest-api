@@ -1,6 +1,7 @@
 package com.dnsouzadev.api.controller;
 
 import com.dnsouzadev.api.dto.CarPostDTO;
+import com.dnsouzadev.api.message.KafkaProducerMessage;
 import com.dnsouzadev.api.service.CarPostStoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,18 @@ public class CarPostController {
 
     @Autowired
     private CarPostStoreService carPostStoreService;
+
+    @Autowired
+    private KafkaProducerMessage kafkaProducerMessage;
+
+    @PostMapping("/post")
+    public ResponseEntity postCarForSale(@RequestBody CarPostDTO carPostDTO){
+//        LOG.info("USANDO EVENTOS/MENSAGENS KAFKA - Producer Car Post information: {}", carPostDTO);
+
+        kafkaProducerMessage.sendMessage(carPostDTO);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 
 
     @GetMapping("/posts")
