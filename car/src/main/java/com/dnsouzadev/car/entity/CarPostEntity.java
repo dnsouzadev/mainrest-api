@@ -39,7 +39,7 @@ public class CarPostEntity {
     private String contact;
 
     @ManyToOne
-    @JoinColumn(name = "owner_post_id", nullable = false, referencedColumnName = id)
+    @JoinColumn(name = "owner_post_id", nullable = false, referencedColumnName = "id")
     private OwnerPostEntity ownerPost;
 
 }
