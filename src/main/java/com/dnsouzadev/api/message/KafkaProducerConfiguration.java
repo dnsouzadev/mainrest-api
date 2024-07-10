@@ -39,5 +39,4 @@ public class KafkaProducerConfiguration {
     public KafkaTemplate<String, CarPostDTO> userKafkaTemplate(){
         return new KafkaTemplate<>(userProducerFactory());
     }
-
 }
